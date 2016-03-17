@@ -31,7 +31,7 @@ def main():
 		
 	# テスト
 	test = args.input
-	if args.input == "":
+	if args.input == None:
 		if os.path.exists(args.infile):
 			with open(args.infile, "r") as f:
 				test = f.read()
@@ -41,16 +41,20 @@ def main():
 
 	# 答え
 	answer = args.answer
-	if args.answer == "":
+	if args.answer == None:
 		if os.path.exists(args.ansfile):
 			with open(args.ansfile, "r") as f:
 				answer = f.read()
 		else:
 			print args.ansfile, ": Invalid check file"
 			return Result.ERROR
+			
+	# 入力の最後は改行で終わってないといけないので答えに改行を足す
+	if answer[-1] != "\n":
+		answer += "\n"
 
 	# 結果を取得
-# 	if args.answer == "":
+# 	if args.answer == None:
 # 		r = re.compile(r"(.*/)*(.*)\.\w+")
 # 		m = r.search(checkFile)
 # 		answer = m.groups()[-1]
@@ -69,11 +73,11 @@ def main():
 	if result != answer:
 		print "result error :"
 		print "[input]"
-		print input
+		print test
 		print "[expected]"
-		print answer
+		print "\"" + answer + "\""
 		print "[result]"
-		print result
+		print "\"" + result + "\""
 		print "[time]"
 		print "%fs (limit:%f)" % (exeTime, Result.TIMELIMIT_SEC)
 		return Result.FAILURE
