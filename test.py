@@ -32,22 +32,32 @@ def main():
 	# テスト
 	test = args.input
 	if args.input == None:
-		if os.path.exists(args.infile):
-			with open(args.infile, "r") as f:
-				test = f.read()
-		else:
+		if args.infile == None:
+			print  "error : Not set a test"
+			return Result.ERROR
+			
+		elif os.path.exists(args.infile) == False:
 			print args.infile, ": Invalid check file"
 			return Result.ERROR
+			
+		else:
+			with open(args.infile, "r") as f:
+				test = f.read()
 
 	# 答え
 	answer = args.answer
 	if args.answer == None:
-		if os.path.exists(args.ansfile):
-			with open(args.ansfile, "r") as f:
-				answer = f.read()
-		else:
+		if args.ansfile == None:
+			print  "error : Not set a answer"
+			return Result.ERROR
+			
+		elif os.path.exists(args.ansfile) == False:
 			print args.ansfile, ": Invalid check file"
 			return Result.ERROR
+			
+		else:
+			with open(args.ansfile, "r") as f:
+				answer = f.read()
 			
 	# 入力の最後は改行で終わってないといけないので答えに改行を足す
 	if answer[-1] != "\n":
