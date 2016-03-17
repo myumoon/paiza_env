@@ -52,14 +52,6 @@ def main():
 	# 入力の最後は改行で終わってないといけないので答えに改行を足す
 	if answer[-1] != "\n":
 		answer += "\n"
-
-	# 結果を取得
-# 	if args.answer == None:
-# 		r = re.compile(r"(.*/)*(.*)\.\w+")
-# 		m = r.search(checkFile)
-# 		answer = m.groups()[-1]
-# 	else:
-# 		answer = args.answer
 	
 	# 実行コマンド
 	cmd = "python " + args.exefile
